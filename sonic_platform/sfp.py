@@ -254,7 +254,7 @@ class Sfp(SfpBase):
             raw = sysfsfile_eeprom.read(num_bytes)
             for n in range(0, num_bytes):
                 eeprom_raw[n] = hex(ord(raw[n]))[2:].zfill(2)
-        except BaseException:
+        except Exception:
             pass
         finally:
             if sysfsfile_eeprom:

@@ -49,7 +49,7 @@ class Eeprom(eeprom_tlvinfo.TlvInfoDecoder):
                     value = match.group(3).rstrip('\0')
 
                 _eeprom_info_dict[idx] = value
-            except BaseException:
+            except Exception:
                 pass
         return _eeprom_info_dict
 
@@ -58,7 +58,7 @@ class Eeprom(eeprom_tlvinfo.TlvInfoDecoder):
         sys.stdout = StringIO()
         try:
             self.read_eeprom_db()
-        except BaseException:
+        except Exception:
             decode_output = sys.stdout.getvalue()
             sys.stdout = original_stdout
             return self.__parse_output(decode_output)
@@ -70,7 +70,7 @@ class Eeprom(eeprom_tlvinfo.TlvInfoDecoder):
         if not os.path.exists(CACHE_ROOT):
             try:
                 os.makedirs(CACHE_ROOT)
-            except BaseException:
+            except Exception:
                 pass
 
         #
@@ -79,7 +79,7 @@ class Eeprom(eeprom_tlvinfo.TlvInfoDecoder):
         #
         try:
             self.set_cache_name(os.path.join(CACHE_ROOT, CACHE_FILE))
-        except BaseException:
+        except Exception:
             pass
 
         e = self.read_eeprom()
@@ -88,7 +88,7 @@ class Eeprom(eeprom_tlvinfo.TlvInfoDecoder):
 
         try:
             self.update_cache(e)
-        except BaseException:
+        except Exception:
             pass
 
         self.decode_eeprom(e)

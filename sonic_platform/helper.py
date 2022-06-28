@@ -39,7 +39,7 @@ class APIHelper():
             mm.seek(int(offset))
             read_data_stream = mm.read(4)
             result = struct.unpack('I', read_data_stream)
-        except BaseException:
+        except Exception:
             status = False
         return status, result
 
@@ -52,14 +52,14 @@ class APIHelper():
             raw_data, err = p.communicate()
             if err.decode('UTF-8') == '':
                 result = raw_data.strip().decode('UTF-8')
-        except BaseException:
+        except Exception:
             status = False
         return status, result
 
     def run_interactive_command(self, cmd):
         try:
             os.system(cmd)
-        except BaseException:
+        except Exception:
             return False
         return True
 
@@ -94,7 +94,7 @@ class APIHelper():
             with open(file_path, 'w') as fd:
                 fd.write(str(data))
                 return True
-        except BaseException:
+        except Exception:
             pass
         return False
 
@@ -110,7 +110,7 @@ class APIHelper():
                 result = raw_data.strip()
             else:
                 status = False
-        except BaseException:
+        except Exception:
             status = False
         return status, result
 
@@ -128,7 +128,7 @@ class APIHelper():
                 result = raw_data.strip()
             else:
                 status = False
-        except BaseException:
+        except Exception:
             status = False
         return status, result
 
@@ -145,7 +145,7 @@ class APIHelper():
                 result = raw_data.strip()
             else:
                 status = False
-        except BaseException:
+        except Exception:
             status = False
         return status, result
 
@@ -205,6 +205,6 @@ class APIHelper():
             with open(sysfs_path, mode='rb', buffering=0) as fd:
                 data = fd.read(256)
                 return data
-        except BaseException:
+        except Exception:
             pass
         return None
