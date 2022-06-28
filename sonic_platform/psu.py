@@ -9,10 +9,6 @@
 #############################################################################
 
 try:
-    import traceback
-    import os
-    import re
-    import math
     from sonic_platform_base.psu_base import PsuBase
     from sonic_platform.eeprom import Eeprom
     from sonic_platform.fan import Fan

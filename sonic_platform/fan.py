@@ -8,10 +8,6 @@
 #
 #############################################################################
 
-import json
-import math
-import os.path
-
 try:
     from sonic_platform_base.fan_base import FanBase
     from .helper import APIHelper

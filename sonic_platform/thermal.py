@@ -8,10 +8,6 @@
 #
 #############################################################################
 
-import json
-import math
-import os.path
-
 try:
     from sonic_platform_base.thermal_base import ThermalBase
     from .helper import APIHelper

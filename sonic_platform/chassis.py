@@ -9,11 +9,7 @@
 #############################################################################
 
 try:
-    import json
-    import os
-    import re
     import sys
-    import subprocess
     import time
     from sonic_platform_base.chassis_base import ChassisBase
     from .helper import APIHelper

@@ -5,10 +5,8 @@
 #
 #############################################################################
 
-import time
 import os
 
-from .fan import Fan
 from .helper import APIHelper
 
 

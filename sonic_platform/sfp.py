@@ -8,14 +8,11 @@
 #
 #############################################################################
 
-import os
 import time
-import subprocess
 from ctypes import create_string_buffer
 
 try:
     from sonic_platform_base.sfp_base import SfpBase
-    from sonic_platform_base.sonic_eeprom import eeprom_dts
     from sonic_platform_base.sonic_sfp.sff8472 import sff8472InterfaceId
     from sonic_platform_base.sonic_sfp.sff8472 import sff8472Dom
     from sonic_platform_base.sonic_sfp.sff8436 import sff8436InterfaceId
@@ -257,7 +254,7 @@ class Sfp(SfpBase):
             raw = sysfsfile_eeprom.read(num_bytes)
             for n in range(0, num_bytes):
                 eeprom_raw[n] = hex(ord(raw[n]))[2:].zfill(2)
-        except:
+        except BaseException:
             pass
         finally:
             if sysfsfile_eeprom:
@@ -464,9 +461,7 @@ class Sfp(SfpBase):
             if self.sfp_type == QSFP_TYPE:
                 offset = 128
                 vendor_rev_width = XCVR_HW_REV_WIDTH_QSFP
-                cable_length_width = XCVR_CABLE_LENGTH_WIDTH_QSFP
                 interface_info_bulk_width = XCVR_INTFACE_BULK_WIDTH_QSFP
-                sfp_type = 'QSFP'
 
                 sfpi_obj = sff8436InterfaceId()
                 if sfpi_obj is None:
@@ -476,9 +471,7 @@ class Sfp(SfpBase):
             else:
                 offset = 0
                 vendor_rev_width = XCVR_HW_REV_WIDTH_SFP
-                cable_length_width = XCVR_CABLE_LENGTH_WIDTH_SFP
                 interface_info_bulk_width = XCVR_INTFACE_BULK_WIDTH_SFP
-                sfp_type = 'SFP'
 
                 sfpi_obj = sff8472InterfaceId()
                 if sfpi_obj is None:
@@ -1008,7 +1001,6 @@ class Sfp(SfpBase):
             A Boolean, True if power-override is enabled, False if disabled
         """
         if self.sfp_type == QSFP_TYPE:
-            offset = 0
             sfpd_obj = sff8436Dom()
             if sfpd_obj is None:
                 return False
