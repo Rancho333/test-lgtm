@@ -126,12 +126,9 @@ class SfpUtil(SfpUtilBase):
             except Exception as err:
                 return None
 
-            try:
-                if len(raw) == 0:
-                    return None
-                eeprom_raw[0] = hex(ord(raw[0]))[2:].zfill(2)
-            except:
+            if len(raw) == 0:
                 return None
+            eeprom_raw[0] = hex(ord(raw[0]))[2:].zfill(2)
 
             power_data = int(eeprom_raw[0], 16)
             # if lpmod, power-override bit and power-set bit are both setted
@@ -261,8 +258,6 @@ class SfpUtil(SfpUtilBase):
                     sysfsfile.seek(TX_DISABLE_BYTE_OFFSET)
                     sysfsfile.write(bytearray(disable))
             except IOError:
-                return False
-            except:
                 return False
 
         # SFP, set tx_disable pin
